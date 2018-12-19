@@ -1,0 +1,40 @@
+diff --git a/Modules/socketmodule.c b/Modules/socketmodule.c
+index 8f571a2eb4..bb8dbc6b9c 100644
+--- a/Modules/socketmodule.c
++++ b/Modules/socketmodule.c
+@@ -1335,7 +1335,7 @@ makesockaddr(SOCKET_T sockfd, struct sockaddr *addr, size_t addrlen, int proto)
+     }
+ #endif
+ 
+-#ifdef AF_CAN
++#ifdef HAVE_LINUX_CAN_H
+     case AF_CAN:
+     {
+         struct sockaddr_can *a = (struct sockaddr_can *)addr;
+@@ -1832,7 +1832,7 @@ getsockaddrarg(PySocketSockObject *s, PyObject *args,
+     }
+ #endif
+ 
+-#if defined(AF_CAN) && defined(CAN_RAW) && defined(CAN_BCM)
++#if defined(HAVE_LINUX_CAN_H) && defined(CAN_RAW) && defined(CAN_BCM)
+     case AF_CAN:
+         switch (s->sock_proto) {
+         case CAN_RAW:
+@@ -2039,7 +2039,7 @@ getsockaddrlen(PySocketSockObject *s, socklen_t *len_ret)
+     }
+ #endif
+ 
+-#ifdef AF_CAN
++#ifdef HAVE_LINUX_CAN_H
+     case AF_CAN:
+     {
+         *len_ret = sizeof (struct sockaddr_can);
+@@ -6342,7 +6342,7 @@ PyInit__socket(void)
+     PyModule_AddStringConstant(m, "BDADDR_LOCAL", "00:00:00:FF:FF:FF");
+ #endif
+ 
+-#ifdef AF_CAN
++#ifdef HAVE_LINUX_CAN_H
+     /* Controller Area Network */
+     PyModule_AddIntMacro(m, AF_CAN);
+ #endif
