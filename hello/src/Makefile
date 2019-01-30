@@ -6,13 +6,18 @@ hello.o: hello.c
 hello: hello.o 
 	gcc hello.o -o hello 
 
-
-hello.seccomp: hello.c
+hello-rumprun: hello.c
 	x86_64-rumprun-netbsd-gcc hello.c -o hello-rumprun
-	rumprun-bake solo5_ukvm_seccomp hello.seccomp hello-rumprun
+
+hello.spt: hello-rumprun
+	rumprun-bake solo5_spt hello.spt hello-rumprun
+
+hello.hvt: hello-rumprun
+	rumprun-bake solo5_hvt hello.hvt hello-rumprun
 
 clean:
 	-rm -f hello.o 
 	-rm -f hello
 	-rm -f hello-rumprun
-
+	-rm -f hello.spt
+	-rm -f hello.hvt
