@@ -106,14 +106,14 @@ python.fs: examples/main.py
 	mkdir -p python/lib/
 	cp -r build/pythondist/lib/python3.5 python/lib/.
 	cp examples/main.py python/lib/python3.5/site-packages/.
-	x86_64-rumprun-netbsd-cookfs python.fs python
+	${RUMPRUN_TOOLCHAIN_TUPLE}-cookfs python.fs python
 
 python_hello.fs: examples/hello.py
 	rm -rf python
 	mkdir -p python/lib/
 	cp -r build/pythondist/lib/python3.5 python/lib/.
 	cp examples/hello.py python/lib/python3.5/site-packages/.
-	x86_64-rumprun-netbsd-cookfs python_hello.fs python
+	${RUMPRUN_TOOLCHAIN_TUPLE}-cookfs python_hello.fs python
 
 
 python_hello.iso: examples/hello.py
@@ -132,7 +132,7 @@ python_flask.fs: flask_main.py
 	cp -r build/pythondist/lib/python3.5 python/lib/.
 	cp -r flask-env/lib/python3.5/site-packages/* python/lib/python3.5/site-packages/.
 	cp flask_main.py python/lib/python3.5/site-packages/.
-	x86_64-rumprun-netbsd-cookfs python_flask.fs python
+	${RUMPRUN_TOOLCHAIN_TUPLE}-cookfs python_flask.fs python
 
 python_tornado.fs: bm_tornado_http.py
 	rm -rf tornado-env
@@ -143,10 +143,10 @@ python_tornado.fs: bm_tornado_http.py
 	cp -r build/pythondist/lib/python3.5 python/lib/.
 	cp -r tornado-env/lib/python3.5/site-packages/* python/lib/python3.5/site-packages/.
 	cp bm_tornado_http.py python/lib/python3.5/site-packages/.
-	x86_64-rumprun-netbsd-cookfs python_tornado.fs python
+	${RUMPRUN_TOOLCHAIN_TUPLE}-cookfs python_tornado.fs python
 
 data_2to3.fs:
-	x86_64-rumprun-netbsd-cookfs data_2to3.fs data_2to3
+	${RUMPRUN_TOOLCHAIN_TUPLE}-cookfs data_2to3.fs data_2to3
 
 flaskenv.iso: flask_main.py
 	rm -rf flask-env
