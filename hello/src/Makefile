@@ -7,7 +7,7 @@ hello: hello.o
 	gcc hello.o -o hello 
 
 hello-rumprun: hello.c
-	x86_64-rumprun-netbsd-gcc hello.c -o hello-rumprun
+	${CC} hello.c -o hello-rumprun
 
 hello.spt: hello-rumprun
 	rumprun-bake solo5_spt hello.spt hello-rumprun

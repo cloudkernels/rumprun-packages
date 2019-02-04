@@ -15,10 +15,10 @@ bin/hello.hvt: build/hello.hvt
 	cp $< $@
 
 build/hello.spt: build/configure
-	$(MAKE) -C build hello.spt
+	CC=${RUMPRUN_CC} $(MAKE) -C build hello.spt
 
 build/hello.hvt: build/configure
-	$(MAKE) -C build hello.hvt
+	CC=${RUMPRUN_CC} $(MAKE) -C build hello.hvt
 
 build/configure:
 	mkdir -p build
