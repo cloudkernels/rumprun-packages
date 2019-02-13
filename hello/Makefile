@@ -1,12 +1,8 @@
 include ../Makefile.inc
 
-all: bin/hello.spt
+all: bin/hello.spt bin/hello.hvt
 
 bin/hello.spt: build/hello.spt
-	mkdir -p bin
-	cp $< $@
-
-bin/hello.hvt: build/hello.hvt
 	mkdir -p bin
 	cp $< $@
 
