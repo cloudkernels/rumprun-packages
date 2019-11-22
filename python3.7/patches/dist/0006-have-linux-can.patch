@@ -1,0 +1,38 @@
+--- a/Modules/socketmodule.c	2019-10-14 17:32:36.000000000 -0500
++++ b/Modules/socketmodule.c	2019-10-24 20:02:01.454889688 -0500
+@@ -1452,7 +1452,7 @@
+     }
+ #endif /* HAVE_LINUX_TIPC_H */
+ 
+-#if defined(AF_CAN) && defined(SIOCGIFNAME)
++#if defined(HAVE_LINUX_CAN_H) && defined(SIOCGIFNAME)
+     case AF_CAN:
+     {
+         struct sockaddr_can *a = (struct sockaddr_can *)addr;
+@@ -2003,7 +2003,7 @@
+     }
+ #endif /* HAVE_LINUX_TIPC_H */
+ 
+-#if defined(AF_CAN) && defined(SIOCGIFINDEX)
++#if defined(HAVE_LINUX_CAN_H) && defined(SIOCGIFINDEX)
+     case AF_CAN:
+         switch (s->sock_proto) {
+ #ifdef CAN_RAW
+@@ -2305,7 +2305,7 @@
+     }
+ #endif /* HAVE_LINUX_TIPC_H */
+ 
+-#ifdef AF_CAN
++#ifdef HAVE_LINUX_CAN_H
+     case AF_CAN:
+     {
+         *len_ret = sizeof (struct sockaddr_can);
+@@ -7037,7 +7037,7 @@
+     PyModule_AddStringConstant(m, "BDADDR_LOCAL", "00:00:00:FF:FF:FF");
+ #endif
+ 
+-#ifdef AF_CAN
++#ifdef HAVE_LINUX_CAN_H
+     /* Controller Area Network */
+     PyModule_AddIntMacro(m, AF_CAN);
+ #endif

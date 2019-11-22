@@ -1,0 +1,52 @@
+--- a/Lib/distutils/unixccompiler.py	2019-11-04 21:53:32.009493677 -0600
++++ b/Lib/distutils/unixccompiler.py	2019-11-07 14:24:22.769062493 -0600
+@@ -177,29 +177,29 @@
+                     linker = self.linker_exe[:]
+                 else:
+                     linker = self.linker_so[:]
+-                if target_lang == "c++" and self.compiler_cxx:
+-                    # skip over environment variable settings if /usr/bin/env
+-                    # is used to set up the linker's environment.
+-                    # This is needed on OSX. Note: this assumes that the
+-                    # normal and C++ compiler have the same environment
+-                    # settings.
+-                    i = 0
+-                    if os.path.basename(linker[0]) == "env":
+-                        i = 1
+-                        while '=' in linker[i]:
+-                            i += 1
++                if sys.platform == 'darwin':
++                    if target_lang == "c++" and self.compiler_cxx:
++                        # skip over environment variable settings if /usr/bin/env
++                        # is used to set up the linker's environment.
++                        # This is needed on OSX. Note: this assumes that the
++                        # normal and C++ compiler have the same environment
++                        # settings.
++                        i = 0
++                        if os.path.basename(linker[0]) == "env":
++                            i = 1
++                            while '=' in linker[i]:
++                                i += 1
+ 
+-                    if os.path.basename(linker[i]) == 'ld_so_aix':
+-                        # AIX platforms prefix the compiler with the ld_so_aix
+-                        # script, so we need to adjust our linker index
+-                        offset = 1
+-                    else:
+-                        offset = 0
++                        if os.path.basename(linker[i]) == 'ld_so_aix':
++                            # AIX platforms prefix the compiler with the ld_so_aix
++                            # script, so we need to adjust our linker index
++                            offset = 1
++                        else:
++                            offset = 0
+ 
+-                    linker[i+offset] = self.compiler_cxx[i]
++                        linker[i+offset] = self.compiler_cxx[i]
+ 
+-                if sys.platform == 'darwin':
+-                    linker = _osx_support.compiler_fixup(linker, ld_args)
++                        linker = _osx_support.compiler_fixup(linker, ld_args)
+ 
+                 self.spawn(linker + ld_args)
+             except DistutilsExecError as msg:

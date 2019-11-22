@@ -1,0 +1,17 @@
+include ../Makefile.inc
+
+INSTALL_DIR=python
+INSTALL_HOSTDIR=hostpython
+EXAMPLES_DIR?=examples
+
+PYTHON_DIR=$(shell pwd)/../$(PYTHON_VER)
+PYTHON_SRC=$(PYTHON_DIR)/build
+PYTHON_DIST=$(PYTHON_DIR)/$(INSTALL_DIR)
+PYTHON_HOSTDIST=$(PYTHON_DIR)/$(INSTALL_HOSTDIR)
+export PATH := $(PYTHON_HOSTDIST)/bin:$(PATH)
+
+TARBALL=$(notdir $(UPSTREAM))
+NCORES=$(shell nproc)
+
+SOLO5_SPT=$(shell pwd)/../../rumprun/solo5/tenders/spt/solo5-spt
+SOLO5_HVT=$(shell pwd)/../../rumprun/solo5/tenders/hvt/solo5-hvt
