@@ -1,0 +1,24 @@
+--- a/numpy/distutils/ccompiler.py	2019-10-15 14:30:31.000000000 -0500
++++ b/numpy/distutils/ccompiler.py	2019-11-18 09:27:17.523361597 -0600
+@@ -688,7 +688,9 @@
+         cxx.linker_so = [cxx.linker_so[0], cxx.compiler_cxx[0]] \
+                         + cxx.linker_so[2:]
+     else:
+-        cxx.linker_so = [cxx.compiler_cxx[0]] + cxx.linker_so[1:]
++        #cxx.linker_so = [cxx.compiler_cxx[0]] + cxx.linker_so[1:]
++        cxx.linker_so = ['g++'] + cxx.linker_so[1:]
++        cxx.set_executable('linker_so', cxx.linker_so)
+     return cxx
+ 
+ replace_method(CCompiler, 'cxx_compiler', CCompiler_cxx_compiler)
+--- a/numpy/distutils/fcompiler/gnu.py	2019-10-15 14:30:31.000000000 -0500
++++ b/numpy/distutils/fcompiler/gnu.py	2019-11-18 09:27:17.523361597 -0600
+@@ -309,7 +309,7 @@
+                           "-fno-second-underscore"] + _EXTRAFLAGS,
+         'compiler_fix' : [None, "-Wall",  "-g","-ffixed-form",
+                           "-fno-second-underscore"] + _EXTRAFLAGS,
+-        'linker_so'    : ["<F90>", "-Wall", "-g"],
++        'linker_so'    : ["gcc", "-Wall", "-g"],
+         'archiver'     : ["ar", "-cr"],
+         'ranlib'       : ["ranlib"],
+         'linker_exe'   : [None, "-Wall"]

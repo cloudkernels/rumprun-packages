@@ -1,0 +1,96 @@
+--- a/joblib/backports.py	2019-10-01 02:39:34.000000000 -0500
++++ b/joblib/backports.py	2019-11-16 19:08:19.677214728 -0600
+@@ -6,7 +6,16 @@
+ import ctypes
+ import sys
+ 
+-from pkg_resources import parse_version
++# borrow sklearn's _parse_version
++def _parse_version(version_string):
++    version = []
++    for x in version_string.split('.'):
++        try:
++            version.append(int(x))
++        except ValueError:
++            # x may be of the form dev-1ea1592
++            version.append(x)
++    return tuple(version)
+ 
+ try:
+     import numpy as np
+@@ -21,7 +30,7 @@
+         """
+         mm = np.memmap(filename, dtype=dtype, mode=mode, offset=offset,
+                        shape=shape, order=order)
+-        if parse_version(np.__version__) < parse_version('1.13'):
++        if _parse_version(np.__version__) < (1,13):
+             mm.offset = offset
+         return mm
+ except ImportError:
+--- a/conftest.py	2019-10-01 02:39:34.000000000 -0500
++++ b/conftest.py	2019-11-16 19:17:51.222186350 -0600
+@@ -1,5 +1,3 @@
+-from pkg_resources import parse_version
+-
+ import pytest
+ from _pytest.doctest import DoctestItem
+ 
+@@ -14,6 +12,16 @@
+ except ImportError:
+     loop = None
+ 
++# borrow sklearn's _parse_version
++def _parse_version(version_string):
++    version = []
++    for x in version_string.split('.'):
++        try:
++            version.append(int(x))
++        except ValueError:
++            # x may be of the form dev-1ea1592
++            version.append(x)
++    return tuple(version)
+ 
+ def pytest_collection_modifyitems(config, items):
+     skip_doctests = True
+@@ -25,7 +33,7 @@
+             # numpy changed the str/repr formatting of numpy arrays in 1.14.
+             # We want to run doctests only for numpy >= 1.14.
+             import numpy as np
+-            if parse_version(np.__version__) >= parse_version('1.14'):
++            if _parse_version(np.__version__) >= (1,14):
+                 skip_doctests = False
+         except ImportError:
+             pass
+--- a/joblib/compressor.py	2019-10-01 02:39:34.000000000 -0500
++++ b/joblib/compressor.py	2019-11-16 19:16:37.070061766 -0600
+@@ -3,10 +3,20 @@
+ import sys
+ import io
+ import zlib
+-from pkg_resources import parse_version
+ 
+ from ._compat import _basestring, PY3_OR_LATER
+ 
++# borrow sklearn's _parse_version
++def _parse_version(version_string):
++    version = []
++    for x in version_string.split('.'):
++        try:
++            version.append(int(x))
++        except ValueError:
++            # x may be of the form dev-1ea1592
++            version.append(x)
++    return tuple(version)
++
+ try:
+     from threading import RLock
+ except ImportError:
+@@ -227,7 +237,7 @@
+                              'python3+.')
+ 
+         if lz4 is None or (
+-            parse_version(lz4.__version__) < parse_version('0.19')
++            _parse_version(lz4.__version__) < (0,19)
+         ):
+             raise ValueError(LZ4_NOT_INSTALLED_ERROR)
+ 

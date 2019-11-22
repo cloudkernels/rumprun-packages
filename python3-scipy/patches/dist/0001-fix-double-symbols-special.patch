@@ -1,0 +1,502 @@
+--- a/scipy/special/cython_special.c	2019-08-07 22:34:26.000000000 -0500
++++ b/scipy/special/cython_special.c	2019-11-17 16:45:38.090157558 -0600
+@@ -3109,7 +3109,7 @@
+ static double __pyx_f_5scipy_7special_14cython_special_y0(double, int __pyx_skip_dispatch); /*proto*/
+ static double __pyx_f_5scipy_7special_14cython_special_y1(double, int __pyx_skip_dispatch); /*proto*/
+ static double __pyx_f_5scipy_7special_14cython_special_zetac(double, int __pyx_skip_dispatch); /*proto*/
+-__PYX_EXTERN_C int wrap_PyUFunc_getfperr(void); /*proto*/
++//__PYX_EXTERN_C int wrap_PyUFunc_getfperr(void); /*proto*/
+ static void __pyx_fuse_0__pyx_f_5scipy_7special_14cython_special_airy(__pyx_t_double_complex, __pyx_t_double_complex *, __pyx_t_double_complex *, __pyx_t_double_complex *, __pyx_t_double_complex *); /*proto*/
+ static void __pyx_fuse_1__pyx_f_5scipy_7special_14cython_special_airy(double, double *, double *, double *, double *); /*proto*/
+ static void __pyx_fuse_0__pyx_f_5scipy_7special_14cython_special_airye(__pyx_t_double_complex, __pyx_t_double_complex *, __pyx_t_double_complex *, __pyx_t_double_complex *, __pyx_t_double_complex *); /*proto*/
+@@ -4622,32 +4622,32 @@
+  *     """
+  *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
+  */
+-
+-int wrap_PyUFunc_getfperr(void) {
+-  int __pyx_r;
+-
+-  /* "_cython_special.pxi":18
+- *     this avoids messing with the UNIQUE_SYMBOL #defines
+- *     """
+- *     return PyUFunc_getfperr()             # <<<<<<<<<<<<<<
+- * 
+- * cdef extern from "numpy/npy_math.h":
+- */
+-  __pyx_r = PyUFunc_getfperr();
+-  goto __pyx_L0;
+-
+-  /* "_cython_special.pxi":13
+- *     int PyUFunc_getfperr() nogil
+- * 
+- * cdef public int wrap_PyUFunc_getfperr() nogil:             # <<<<<<<<<<<<<<
+- *     """
+- *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
+- */
+-
+-  /* function exit code */
+-  __pyx_L0:;
+-  return __pyx_r;
+-}
++//
++//int wrap_PyUFunc_getfperr(void) {
++//  int __pyx_r;
++//
++//  /* "_cython_special.pxi":18
++// *     this avoids messing with the UNIQUE_SYMBOL #defines
++// *     """
++// *     return PyUFunc_getfperr()             # <<<<<<<<<<<<<<
++// * 
++// * cdef extern from "numpy/npy_math.h":
++// */
++//  __pyx_r = PyUFunc_getfperr();
++//  goto __pyx_L0;
++//
++//  /* "_cython_special.pxi":13
++// *     int PyUFunc_getfperr() nogil
++// * 
++// * cdef public int wrap_PyUFunc_getfperr() nogil:             # <<<<<<<<<<<<<<
++// *     """
++// *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
++// */
++//
++//  /* function exit code */
++//  __pyx_L0:;
++//  return __pyx_r;
++//}
+ 
+ /* "scipy/special/cython_special.pyx":1662
+  *     cdef npy_double _func_zetac "zetac"(npy_double)nogil
+diff -urN a/scipy/special/_ellip_harm_2.c special/_ellip_harm_2.c
+--- a/scipy/special/_ellip_harm_2.c	2019-08-07 22:34:23.000000000 -0500
++++ b/scipy/special/_ellip_harm_2.c	2019-11-17 16:45:38.102157582 -0600
+@@ -1642,7 +1642,7 @@
+ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void); /*proto*/
+ 
+ /* Module declarations from 'scipy.special._ellip_harm_2' */
+-__PYX_EXTERN_C int wrap_PyUFunc_getfperr(void); /*proto*/
++//__PYX_EXTERN_C int wrap_PyUFunc_getfperr(void); /*proto*/
+ #define __Pyx_MODULE_NAME "scipy.special._ellip_harm_2"
+ extern int __pyx_module_is_main_scipy__special___ellip_harm_2;
+ int __pyx_module_is_main_scipy__special___ellip_harm_2 = 0;
+@@ -4276,30 +4276,30 @@
+  *     """
+  *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
+  */
+-
+-int wrap_PyUFunc_getfperr(void) {
+-  int __pyx_r;
+-
+-  /* "scipy/special/_ellip_harm_2.pyx":206
+- *     this avoids messing with the UNIQUE_SYMBOL #defines
+- *     """
+- *     return PyUFunc_getfperr()             # <<<<<<<<<<<<<<
+- */
+-  __pyx_r = PyUFunc_getfperr();
+-  goto __pyx_L0;
+-
+-  /* "scipy/special/_ellip_harm_2.pyx":201
+- *     int PyUFunc_getfperr() nogil
+- * 
+- * cdef public int wrap_PyUFunc_getfperr() nogil:             # <<<<<<<<<<<<<<
+- *     """
+- *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
+- */
+-
+-  /* function exit code */
+-  __pyx_L0:;
+-  return __pyx_r;
+-}
++//
++//int wrap_PyUFunc_getfperr(void) {
++//  int __pyx_r;
++//
++//  /* "scipy/special/_ellip_harm_2.pyx":206
++// *     this avoids messing with the UNIQUE_SYMBOL #defines
++// *     """
++// *     return PyUFunc_getfperr()             # <<<<<<<<<<<<<<
++// */
++//  __pyx_r = PyUFunc_getfperr();
++//  goto __pyx_L0;
++//
++//  /* "scipy/special/_ellip_harm_2.pyx":201
++// *     int PyUFunc_getfperr() nogil
++// * 
++// * cdef public int wrap_PyUFunc_getfperr() nogil:             # <<<<<<<<<<<<<<
++// *     """
++// *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
++// */
++//
++//  /* function exit code */
++//  __pyx_L0:;
++//  return __pyx_r;
++//}
+ 
+ /* "sf_error.pxd":28
+  * 
+diff -urN a/scipy/special/getfperr.c special/getfperr.c
+--- a/scipy/special/getfperr.c	1969-12-31 18:00:00.000000000 -0600
++++ b/scipy/special/getfperr.c	2019-11-17 17:12:57.881537393 -0600
+@@ -0,0 +1,28 @@
++//#include "numpy/arrayobject.h"
++//#include "numpy/ufuncobject.h"
++
++int wrap_PyUFunc_getfperr(void) {
++  int __pyx_r;
++
++  /* "_cython_special.pxi":18
++ *     this avoids messing with the UNIQUE_SYMBOL #defines
++ *     """
++ *     return PyUFunc_getfperr()             # <<<<<<<<<<<<<<
++ * 
++ * cdef extern from "numpy/npy_math.h":
++ */
++  __pyx_r = PyUFunc_getfperr();
++  goto __pyx_L0;
++
++  /* "_cython_special.pxi":13
++ *     int PyUFunc_getfperr() nogil
++ * 
++ * cdef public int wrap_PyUFunc_getfperr() nogil:             # <<<<<<<<<<<<<<
++ *     """
++ *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
++ */
++
++  /* function exit code */
++  __pyx_L0:;
++  return __pyx_r;
++}
+diff -urN a/scipy/special/_round.c special/_round.c
+--- a/scipy/special/_round.c	1969-12-31 18:00:00.000000000 -0600
++++ b/scipy/special/_round.c	2019-11-17 16:45:38.098157574 -0600
+@@ -0,0 +1,67 @@
++/*
++ * Functions for adding two double precision numbers with rounding to
++ * infinity or rounding to negative infinity without using <fenv.h>.
++ */
++#include <numpy/npy_math.h>
++#include "_c99compat.h"
++#include "cephes/dd_idefs.h"
++
++
++double add_round_up(double a, double b)
++{
++    double s, err;
++
++    if (sc_isnan(a) || sc_isnan(b)) {
++	return NPY_NAN;
++    }
++
++    s = two_sum(a, b, &err);
++    if (err > 0) {
++	/* fl(a + b) rounded down */
++	return npy_nextafter(s, NPY_INFINITY);
++    }
++    else {
++	/* fl(a + b) rounded up or didn't round */
++	return s;
++    }
++}
++
++
++double add_round_down(double a, double b)
++{
++    double s, err;
++
++    if (sc_isnan(a) || sc_isnan(b)) {
++	return NPY_NAN;
++    }
++
++    s = two_sum(a, b, &err);
++    if (err < 0) {
++	return npy_nextafter(s, -NPY_INFINITY);
++    }
++    else {
++	return s;
++    }
++}
++
++
++/* Helper code for testing _round.h. */
++#if __STDC_VERSION__ >= 199901L
++/* We have C99 */
++#include <fenv.h>
++#else
++
++int fesetround(int round)
++{
++    return -1;
++}
++
++int fegetround()
++{
++    return -1;
++}
++
++#define FE_UPWARD -1
++#define FE_DOWNWARD -1
++
++#endif
+diff -urN a/scipy/special/_round.h special/_round.h
+--- a/scipy/special/_round.h	2019-06-06 19:12:08.000000000 -0500
++++ b/scipy/special/_round.h	2019-11-17 16:45:38.102157582 -0600
+@@ -10,43 +10,8 @@
+ #include "cephes/dd_idefs.h"
+ 
+ 
+-double add_round_up(double a, double b)
+-{
+-    double s, err;
+-
+-    if (sc_isnan(a) || sc_isnan(b)) {
+-	return NPY_NAN;
+-    }
+-
+-    s = two_sum(a, b, &err);
+-    if (err > 0) {
+-	/* fl(a + b) rounded down */
+-	return npy_nextafter(s, NPY_INFINITY);
+-    }
+-    else {
+-	/* fl(a + b) rounded up or didn't round */
+-	return s;
+-    }
+-}
+-
+-
+-double add_round_down(double a, double b)
+-{
+-    double s, err;
+-
+-    if (sc_isnan(a) || sc_isnan(b)) {
+-	return NPY_NAN;
+-    }
+-
+-    s = two_sum(a, b, &err);
+-    if (err < 0) {
+-	return npy_nextafter(s, -NPY_INFINITY);
+-    }
+-    else {
+-	return s;
+-    }
+-}
+-
++double add_round_up(double a, double b);
++double add_round_down(double a, double b);
+ 
+ /* Helper code for testing _round.h. */
+ #if __STDC_VERSION__ >= 199901L
+@@ -54,15 +19,8 @@
+ #include <fenv.h>
+ #else
+ 
+-int fesetround(int round)
+-{
+-    return -1;
+-}
+-
+-int fegetround()
+-{
+-    return -1;
+-}
++int fesetround(int round);
++int fegetround();
+ 
+ #define FE_UPWARD -1
+ #define FE_DOWNWARD -1
+diff -urN a/scipy/special/setup.py special/setup.py
+--- a/scipy/special/setup.py	2019-08-07 22:07:06.000000000 -0500
++++ b/scipy/special/setup.py	2019-11-17 16:45:38.098157574 -0600
+@@ -72,7 +72,7 @@
+     # Extension _ufuncs
+     headers = ['*.h', join('c_misc', '*.h'), join('cephes', '*.h')]
+     ufuncs_src = ['_ufuncs.c', 'sf_error.c', '_logit.c.src',
+-                  "amos_wrappers.c", "cdf_wrappers.c", "specfun_wrappers.c"]
++                  "amos_wrappers.c", "cdf_wrappers.c", "specfun_wrappers.c", "getfperr.c"]
+     ufuncs_dep = (headers + ufuncs_src + amos_src + c_misc_src + cephes_src
+                   + mach_src + cdf_src + specfun_src)
+     cfg = dict(get_system_info('lapack_opt'))
+@@ -87,11 +87,11 @@
+                          **cfg)
+ 
+     # Extension _ufuncs_cxx
+-    ufuncs_cxx_src = ['_ufuncs_cxx.cxx', 'sf_error.c',
++    ufuncs_cxx_src = ['_ufuncs_cxx.cxx', 'sf_error.c', 'getfperr.c',
+                       '_faddeeva.cxx', 'Faddeeva.cc',
+                       '_wright.cxx', 'wright.cc']
+     ufuncs_cxx_dep = (headers + ufuncs_cxx_src + cephes_src
+-                      + ['*.hh'])
++                      + ['*.hh'] + ['_round.c'])
+     config.add_extension('_ufuncs_cxx',
+                          sources=ufuncs_cxx_src,
+                          depends=ufuncs_cxx_dep,
+@@ -101,7 +101,7 @@
+ 
+     cfg = dict(get_system_info('lapack_opt'))
+     config.add_extension('_ellip_harm_2',
+-                         sources=['_ellip_harm_2.c', 'sf_error.c',],
++                         sources=['_ellip_harm_2.c', 'sf_error.c', 'getfperr.c'],
+                          **cfg
+                          )
+ 
+@@ -109,7 +109,7 @@
+     config.add_data_files('cython_special.pxd')
+     
+     cython_special_src = ['cython_special.c', 'sf_error.c', '_logit.c.src',
+-                          "amos_wrappers.c", "cdf_wrappers.c", "specfun_wrappers.c"]
++                          "amos_wrappers.c", "cdf_wrappers.c", "specfun_wrappers.c", "getfperr.c"]
+     cython_special_dep = (headers + ufuncs_src + ufuncs_cxx_src + amos_src
+                           + c_misc_src + cephes_src + mach_src + cdf_src
+                           + specfun_src)
+@@ -130,7 +130,7 @@
+ 
+     # testing for _round.h
+     config.add_extension('_test_round',
+-                         sources=['_test_round.c'],
++                         sources=['_test_round.c', '_round.c'],
+                          depends=['_round.h', 'cephes/dd_idefs.h'],
+                          include_dirs=[numpy.get_include()] + inc_dirs,
+                          extra_info=get_info('npymath'))
+diff -urN a/scipy/special/_ufuncs.c special/_ufuncs.c
+--- a/scipy/special/_ufuncs.c	2019-08-07 22:34:27.000000000 -0500
++++ b/scipy/special/_ufuncs.c	2019-11-17 16:45:38.094157566 -0600
+@@ -4483,7 +4483,7 @@
+ static void *__pyx_v_5scipy_7special_7_ufuncs_ufunc_zetac_data[2];
+ static char __pyx_v_5scipy_7special_7_ufuncs_ufunc_zetac_types[4];
+ static char *__pyx_v_5scipy_7special_7_ufuncs_ufunc_zetac_doc;
+-__PYX_EXTERN_C int wrap_PyUFunc_getfperr(void); /*proto*/
++//__PYX_EXTERN_C int wrap_PyUFunc_getfperr(void); /*proto*/
+ static void __pyx_f_5scipy_7special_7_ufuncs__set_action(sf_error_t, sf_action_t); /*proto*/
+ static void __pyx_f_5scipy_7special_7_ufuncs_loop_D_DD__As_DD_D(char **, npy_intp *, npy_intp *, void *); /*proto*/
+ static void __pyx_f_5scipy_7special_7_ufuncs_loop_D_DD__As_FF_F(char **, npy_intp *, npy_intp *, void *); /*proto*/
+@@ -5244,32 +5244,32 @@
+  *     """
+  *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
+  */
+-
+-int wrap_PyUFunc_getfperr(void) {
+-  int __pyx_r;
+-
+-  /* "_ufuncs_extra_code_common.pxi":28
+- *     this avoids messing with the UNIQUE_SYMBOL #defines
+- *     """
+- *     return PyUFunc_getfperr()             # <<<<<<<<<<<<<<
+- * 
+- * cimport libc
+- */
+-  __pyx_r = PyUFunc_getfperr();
+-  goto __pyx_L0;
+-
+-  /* "_ufuncs_extra_code_common.pxi":23
+- *     int PyUFunc_getfperr() nogil
+- * 
+- * cdef public int wrap_PyUFunc_getfperr() nogil:             # <<<<<<<<<<<<<<
+- *     """
+- *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
+- */
+-
+-  /* function exit code */
+-  __pyx_L0:;
+-  return __pyx_r;
+-}
++//
++//int wrap_PyUFunc_getfperr(void) {
++//  int __pyx_r;
++//
++//  /* "_ufuncs_extra_code_common.pxi":28
++// *     this avoids messing with the UNIQUE_SYMBOL #defines
++// *     """
++// *     return PyUFunc_getfperr()             # <<<<<<<<<<<<<<
++// * 
++// * cimport libc
++// */
++//  __pyx_r = PyUFunc_getfperr();
++//  goto __pyx_L0;
++//
++//  /* "_ufuncs_extra_code_common.pxi":23
++// *     int PyUFunc_getfperr() nogil
++// * 
++// * cdef public int wrap_PyUFunc_getfperr() nogil:             # <<<<<<<<<<<<<<
++// *     """
++// *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
++// */
++//
++//  /* function exit code */
++//  __pyx_L0:;
++//  return __pyx_r;
++//}
+ 
+ /* "_ufuncs_extra_code_common.pxi":37
+  * np.import_ufunc()
+diff -urN a/scipy/special/_ufuncs_cxx.cxx special/_ufuncs_cxx.cxx
+--- a/scipy/special/_ufuncs_cxx.cxx	2019-08-07 22:34:24.000000000 -0500
++++ b/scipy/special/_ufuncs_cxx.cxx	2019-11-17 16:45:38.102157582 -0600
+@@ -1578,7 +1578,7 @@
+ static void *__pyx_v_5scipy_7special_11_ufuncs_cxx__export_faddeeva_ndtr;
+ static void *__pyx_v_5scipy_7special_11_ufuncs_cxx__export_faddeeva_w;
+ static void *__pyx_v_5scipy_7special_11_ufuncs_cxx__export_wrightomega;
+-__PYX_EXTERN_C int wrap_PyUFunc_getfperr(void); /*proto*/
++//__PYX_EXTERN_C int wrap_PyUFunc_getfperr(void); /*proto*/
+ #define __Pyx_MODULE_NAME "scipy.special._ufuncs_cxx"
+ extern int __pyx_module_is_main_scipy__special___ufuncs_cxx;
+ int __pyx_module_is_main_scipy__special___ufuncs_cxx = 0;
+@@ -1664,32 +1664,32 @@
+  *     """
+  *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
+  */
+-
+-int wrap_PyUFunc_getfperr(void) {
+-  int __pyx_r;
+-
+-  /* "_ufuncs_extra_code_common.pxi":28
+- *     this avoids messing with the UNIQUE_SYMBOL #defines
+- *     """
+- *     return PyUFunc_getfperr()             # <<<<<<<<<<<<<<
+- * 
+- * cimport libc
+- */
+-  __pyx_r = PyUFunc_getfperr();
+-  goto __pyx_L0;
+-
+-  /* "_ufuncs_extra_code_common.pxi":23
+- *     int PyUFunc_getfperr() nogil
+- * 
+- * cdef public int wrap_PyUFunc_getfperr() nogil:             # <<<<<<<<<<<<<<
+- *     """
+- *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
+- */
+-
+-  /* function exit code */
+-  __pyx_L0:;
+-  return __pyx_r;
+-}
++//
++//int wrap_PyUFunc_getfperr(void) {
++//  int __pyx_r;
++//
++//  /* "_ufuncs_extra_code_common.pxi":28
++// *     this avoids messing with the UNIQUE_SYMBOL #defines
++// *     """
++// *     return PyUFunc_getfperr()             # <<<<<<<<<<<<<<
++// * 
++// * cimport libc
++// */
++//  __pyx_r = PyUFunc_getfperr();
++//  goto __pyx_L0;
++//
++//  /* "_ufuncs_extra_code_common.pxi":23
++// *     int PyUFunc_getfperr() nogil
++// * 
++// * cdef public int wrap_PyUFunc_getfperr() nogil:             # <<<<<<<<<<<<<<
++// *     """
++// *     Call PyUFunc_getfperr in a context where PyUFunc_API array is initialized;
++// */
++//
++//  /* function exit code */
++//  __pyx_L0:;
++//  return __pyx_r;
++//}
+ 
+ /* "_ufuncs_extra_code_common.pxi":37
+  * np.import_ufunc()

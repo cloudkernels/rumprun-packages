@@ -1,0 +1,281 @@
+diff -urN build/scipy/optimize/Zeros/zeros.h optimize/Zeros/zeros.h
+--- a/scipy/optimize/Zeros/zeros.h	2019-06-06 19:12:06.000000000 -0500
++++ b/scipy/optimize/Zeros/zeros.h	2019-11-12 19:35:54.161571812 -0600
+@@ -10,7 +10,7 @@
+     int funcalls;
+     int iterations;
+     int error_num;
+-} scipy_zeros_info;
++} scipy__zeros_info;
+ 
+ 
+ /* Must agree with _ECONVERGED, _ESIGNERR, _ECONVERR  in zeros.py */
+@@ -22,19 +22,19 @@
+ 
+ typedef double (*callback_type)(double, void*);
+ typedef double (*solver_type)(callback_type, double, double, double, double,
+-                              int, void *, scipy_zeros_info*);
++                              int, void *, scipy__zeros_info*);
+ 
+ extern double bisect(callback_type f, double xa, double xb, double xtol,
+                      double rtol, int iter, void *func_data,
+-                     scipy_zeros_info *solver_stats);
++                     scipy__zeros_info *solver_stats);
+ extern double ridder(callback_type f, double xa, double xb, double xtol,
+                      double rtol, int iter, void *func_data,
+-                     scipy_zeros_info *solver_stats);
++                     scipy__zeros_info *solver_stats);
+ extern double brenth(callback_type f, double xa, double xb, double xtol,
+                      double rtol, int iter, void *func_data,
+-                     scipy_zeros_info *solver_stats);
++                     scipy__zeros_info *solver_stats);
+ extern double brentq(callback_type f, double xa, double xb, double xtol,
+                      double rtol, int iter, void *func_data,
+-                     scipy_zeros_info *solver_stats);
++                     scipy__zeros_info *solver_stats);
+ 
+ #endif
+diff -urN build/scipy/optimize/Zeros/bisect.c optimize/Zeros/bisect.c
+--- a/scipy/optimize/Zeros/bisect.c	2019-06-06 19:12:06.000000000 -0500
++++ b/scipy/optimize/Zeros/bisect.c	2019-11-12 19:40:17.314042126 -0600
+@@ -5,7 +5,7 @@
+ 
+ double
+ bisect(callback_type f, double xa, double xb, double xtol, double rtol,
+-       int iter, void *func_data, scipy_zeros_info *solver_stats)
++       int iter, void *func_data, scipy__zeros_info *solver_stats)
+ {
+     int i;
+     double dm,xm,fm,fa,fb;
+diff -urN build/scipy/optimize/Zeros/brenth.c optimize/Zeros/brenth.c
+--- a/scipy/optimize/Zeros/brenth.c	2019-06-06 19:12:06.000000000 -0500
++++ b/scipy/optimize/Zeros/brenth.c	2019-11-12 19:40:34.250071173 -0600
+@@ -36,7 +36,7 @@
+ 
+ double
+ brenth(callback_type f, double xa, double xb, double xtol, double rtol,
+-       int iter, void *func_data, scipy_zeros_info *solver_stats)
++       int iter, void *func_data, scipy__zeros_info *solver_stats)
+ {
+     double xpre = xa, xcur = xb;
+     double xblk = 0., fpre, fcur, fblk = 0., spre = 0., scur = 0., sbis;
+diff -urN build/scipy/optimize/Zeros/brentq.c optimize/Zeros/brentq.c
+--- a/scipy/optimize/Zeros/brentq.c	2019-06-06 19:12:06.000000000 -0500
++++ b/scipy/optimize/Zeros/brentq.c	2019-11-12 19:40:41.514083634 -0600
+@@ -35,7 +35,7 @@
+ 
+ double
+ brentq(callback_type f, double xa, double xb, double xtol, double rtol,
+-       int iter, void *func_data, scipy_zeros_info *solver_stats)
++       int iter, void *func_data, scipy__zeros_info *solver_stats)
+ {
+     double xpre = xa, xcur = xb;
+     double xblk = 0., fpre, fcur, fblk = 0., spre = 0., scur = 0., sbis;
+diff -urN build/scipy/optimize/Zeros/ridder.c optimize/Zeros/ridder.c
+--- a/scipy/optimize/Zeros/ridder.c	2019-06-06 19:12:06.000000000 -0500
++++ b/scipy/optimize/Zeros/ridder.c	2019-11-12 19:40:53.078103473 -0600
+@@ -16,7 +16,7 @@
+ 
+ double
+ ridder(callback_type f, double xa, double xb, double xtol, double rtol,
+-       int iter, void *func_data, scipy_zeros_info *solver_stats)
++       int iter, void *func_data, scipy__zeros_info *solver_stats)
+ {
+     int i;
+     double dm,dn,xm,xn=0.0,fn,fm,fa,fb,tol;
+diff -urN build/scipy/optimize/cython_optimize/_zeros.c optimize/cython_optimize/_zeros.c
+--- a/scipy/optimize/cython_optimize/_zeros.c	2019-08-07 22:34:15.000000000 -0500
++++ b/scipy/optimize/cython_optimize/_zeros.c	2019-11-12 19:54:49.499544346 -0600
+@@ -1528,7 +1528,7 @@
+  */
+ 
+ static double __pyx_f_5scipy_8optimize_15cython_optimize_6_zeros_bisect(__pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_callback_type __pyx_v_f, double __pyx_v_xa, double __pyx_v_xb, void *__pyx_v_args, double __pyx_v_xtol, double __pyx_v_rtol, int __pyx_v_iter, __pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_zeros_full_output *__pyx_v_full_output) {
+-  scipy_zeros_info __pyx_v_solver_stats;
++  scipy__zeros_info __pyx_v_solver_stats;
+   __pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_zeros_parameters __pyx_v_myparams;
+   double __pyx_v_root;
+   double __pyx_r;
+@@ -1652,7 +1652,7 @@
+  */
+ 
+ static double __pyx_f_5scipy_8optimize_15cython_optimize_6_zeros_ridder(__pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_callback_type __pyx_v_f, double __pyx_v_xa, double __pyx_v_xb, void *__pyx_v_args, double __pyx_v_xtol, double __pyx_v_rtol, int __pyx_v_iter, __pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_zeros_full_output *__pyx_v_full_output) {
+-  scipy_zeros_info __pyx_v_solver_stats;
++  scipy__zeros_info __pyx_v_solver_stats;
+   __pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_zeros_parameters __pyx_v_myparams;
+   double __pyx_v_root;
+   double __pyx_r;
+@@ -1776,7 +1776,7 @@
+  */
+ 
+ static double __pyx_f_5scipy_8optimize_15cython_optimize_6_zeros_brenth(__pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_callback_type __pyx_v_f, double __pyx_v_xa, double __pyx_v_xb, void *__pyx_v_args, double __pyx_v_xtol, double __pyx_v_rtol, int __pyx_v_iter, __pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_zeros_full_output *__pyx_v_full_output) {
+-  scipy_zeros_info __pyx_v_solver_stats;
++  scipy__zeros_info __pyx_v_solver_stats;
+   __pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_zeros_parameters __pyx_v_myparams;
+   double __pyx_v_root;
+   double __pyx_r;
+@@ -1900,7 +1900,7 @@
+  */
+ 
+ static double __pyx_f_5scipy_8optimize_15cython_optimize_6_zeros_brentq(__pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_callback_type __pyx_v_f, double __pyx_v_xa, double __pyx_v_xb, void *__pyx_v_args, double __pyx_v_xtol, double __pyx_v_rtol, int __pyx_v_iter, __pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_zeros_full_output *__pyx_v_full_output) {
+-  scipy_zeros_info __pyx_v_solver_stats;
++  scipy__zeros_info __pyx_v_solver_stats;
+   __pyx_t_5scipy_8optimize_15cython_optimize_6_zeros_zeros_parameters __pyx_v_myparams;
+   double __pyx_v_root;
+   double __pyx_r;
+diff -urN build/scipy/optimize/cython_optimize/_zeros.c optimize/cython_optimize/_zeros.c
+--- a/scipy/optimize/cython_optimize/_zeros.c	2019-11-12 19:56:09.687683056 -0600
++++ b/scipy/optimize/cython_optimize/_zeros.c	2019-11-12 20:15:51.529660557 -0600
+@@ -594,10 +594,6 @@
+ #define __PYX_HAVE_API__scipy__optimize__cython_optimize___zeros
+ /* Early includes */
+ #include "../Zeros/zeros.h"
+-#include "../Zeros/bisect.c"
+-#include "../Zeros/ridder.c"
+-#include "../Zeros/brenth.c"
+-#include "../Zeros/brentq.c"
+ #ifdef _OPENMP
+ #include <omp.h>
+ #endif /* _OPENMP */
+diff -urN build/scipy/optimize/setup.py optimize/setup.py
+--- a/scipy/optimize/setup.py	2019-11-12 19:56:09.687683056 -0600
++++ b/scipy/optimize/setup.py	2019-11-12 20:17:08.821776907 -0600
+@@ -88,7 +88,8 @@
+     config.add_data_files(os.path.join('cython_optimize', '*.pxd'))
+     config.add_extension(
+         'cython_optimize._zeros',
+-        sources=[os.path.join('cython_optimize', '_zeros.c')])
++        sources=[os.path.join('cython_optimize', '_zeros.c')],
++        depends=rootfind_src)
+ 
+     config.add_subpackage('_shgo_lib')
+     config.add_data_dir('_shgo_lib')
+diff -urN build/scipy/optimize/setup.py optimize/setup.py
+--- a/scipy/optimize/setup.py	2019-08-07 22:07:06.000000000 -0500
++++ b/scipy/optimize/setup.py	2019-11-12 15:19:32.694992033 -0600
+@@ -29,7 +29,7 @@
+                        headers=rootfind_hdr,
+                          **numpy_nodepr_api)
+ 
+-    config.add_extension('_zeros',
++    config.add_extension('__zeros',
+                          sources=['zeros.c'],
+                          libraries=['rootfind'],
+                          depends=(rootfind_src + rootfind_hdr),
+diff -urN build/scipy/optimize/zeros.c optimize/zeros.c
+--- a/scipy/optimize/zeros.c	2019-06-06 19:12:07.000000000 -0500
++++ b/scipy/optimize/zeros.c	2019-11-12 15:17:20.886819923 -0600
+@@ -29,14 +29,14 @@
+     PyObject *function;
+     PyObject *args;
+     jmp_buf env;
+-} scipy_zeros_parameters;
++} scipy__zeros_parameters;
+ 
+ 
+ 
+ static double
+-scipy_zeros_functions_func(double x, void *params)
++scipy__zeros_functions_func(double x, void *params)
+ {
+-    scipy_zeros_parameters *myparams = params;
++    scipy__zeros_parameters *myparams = params;
+     PyObject *args, *f, *retval=NULL;
+     double val;
+ 
+@@ -63,8 +63,8 @@
+     double a, b, xtol, rtol, zero;
+     Py_ssize_t len;
+     int iter, i, fulloutput, disp=1, flag=0;
+-    scipy_zeros_parameters params;
+-    scipy_zeros_info solver_stats;
++    scipy__zeros_parameters params;
++    scipy__zeros_info solver_stats;
+     PyObject *f, *xargs, *item;
+     volatile PyObject *fargs = NULL;
+ 
+@@ -106,7 +106,7 @@
+     if (!setjmp(params.env)) {
+         /* direct return */
+         solver_stats.error_num = 0;
+-        zero = solver(scipy_zeros_functions_func, a, b, xtol, rtol,
++        zero = solver(scipy__zeros_functions_func, a, b, xtol, rtol,
+                       iter, (void*)&params, &solver_stats);
+         Py_DECREF(fargs);
+         fargs = NULL;
+@@ -190,7 +190,7 @@
+ #if PY_VERSION_HEX >= 0x03000000
+ static struct PyModuleDef moduledef = {
+     PyModuleDef_HEAD_INIT,
+-    "_zeros",
++    "__zeros",
+     NULL,
+     -1,
+     Zerosmethods,
+@@ -200,7 +200,7 @@
+     NULL
+ };
+ 
+-PyObject *PyInit__zeros(void)
++PyObject *PyInit___zeros(void)
+ {
+     PyObject *m;
+ 
+@@ -209,8 +209,8 @@
+     return m;
+ }
+ #else
+-PyMODINIT_FUNC init_zeros(void)
++PyMODINIT_FUNC init__zeros(void)
+ {
+-        Py_InitModule("_zeros", Zerosmethods);
++        Py_InitModule("__zeros", Zerosmethods);
+ }
+ #endif
+diff -urN build/scipy/optimize/zeros.py optimize/zeros.py
+--- a/scipy/optimize/zeros.py	2019-06-06 19:12:07.000000000 -0500
++++ b/scipy/optimize/zeros.py	2019-11-12 15:16:12.026729797 -0600
+@@ -2,7 +2,7 @@
+ 
+ import warnings
+ from collections import namedtuple
+-from . import _zeros
++from . import __zeros
+ import numpy as np
+ 
+ 
+@@ -547,7 +547,7 @@
+         raise ValueError("xtol too small (%g <= 0)" % xtol)
+     if rtol < _rtol:
+         raise ValueError("rtol too small (%g < %g)" % (rtol, _rtol))
+-    r = _zeros._bisect(f, a, b, xtol, rtol, maxiter, args, full_output, disp)
++    r = __zeros._bisect(f, a, b, xtol, rtol, maxiter, args, full_output, disp)
+     return results_c(full_output, r)
+ 
+ 
+@@ -643,7 +643,7 @@
+         raise ValueError("xtol too small (%g <= 0)" % xtol)
+     if rtol < _rtol:
+         raise ValueError("rtol too small (%g < %g)" % (rtol, _rtol))
+-    r = _zeros._ridder(f, a, b, xtol, rtol, maxiter, args, full_output, disp)
++    r = __zeros._ridder(f, a, b, xtol, rtol, maxiter, args, full_output, disp)
+     return results_c(full_output, r)
+ 
+ 
+@@ -772,7 +772,7 @@
+         raise ValueError("xtol too small (%g <= 0)" % xtol)
+     if rtol < _rtol:
+         raise ValueError("rtol too small (%g < %g)" % (rtol, _rtol))
+-    r = _zeros._brentq(f, a, b, xtol, rtol, maxiter, args, full_output, disp)
++    r = __zeros._brentq(f, a, b, xtol, rtol, maxiter, args, full_output, disp)
+     return results_c(full_output, r)
+ 
+ 
+@@ -876,7 +876,7 @@
+         raise ValueError("xtol too small (%g <= 0)" % xtol)
+     if rtol < _rtol:
+         raise ValueError("rtol too small (%g < %g)" % (rtol, _rtol))
+-    r = _zeros._brenth(f, a, b, xtol, rtol, maxiter, args, full_output, disp)
++    r = __zeros._brenth(f, a, b, xtol, rtol, maxiter, args, full_output, disp)
+     return results_c(full_output, r)
+ 
+ 

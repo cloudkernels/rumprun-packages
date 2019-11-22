@@ -1,0 +1,12 @@
+--- a/numpy/core/setup.py	2019-11-19 14:17:39.070119638 -0600
++++ b/numpy/core/setup.py	2019-11-19 14:17:28.030092370 -0600
+@@ -78,7 +78,8 @@
+ def is_npy_no_signal():
+     """Return True if the NPY_NO_SIGNAL symbol must be defined in configuration
+     header."""
+-    return sys.platform == 'win32'
++    #return sys.platform == 'win32'
++    return 1
+ 
+ def is_npy_no_smp():
+     """Return True if the NPY_NO_SMP symbol must be defined in public
