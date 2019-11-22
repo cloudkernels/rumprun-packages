@@ -1,0 +1,6 @@
+ac_cv_func_clock_gettime=yes
+ac_cv_func_gethostbyname_r=no
+ac_cv_func_freelocale=no
+ac_cv_func_newlocale=no
+ac_cv_func_uselocale=no
+ac_cv_func_mkostemp=no

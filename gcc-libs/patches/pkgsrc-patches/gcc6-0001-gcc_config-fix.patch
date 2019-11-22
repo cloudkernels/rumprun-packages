@@ -1,0 +1,13 @@
+--- a/lang/gcc6/patches/patch-gcc_config.host	2019-11-03 15:12:16.642021015 -0600
++++ b/lang/gcc6/patches/patch-gcc_config.host	2019-11-03 15:03:00.592710067 -0600
+@@ -8,8 +8,8 @@
+  esac
+  
+  case ${host} in
+--  aarch64*-*-freebsd* | aarch64*-*-linux*)
+-+  aarch64*-*-freebsd* | aarch64*-*-linux* | aarch64*-*-netbsd*)
++-  aarch64*-*-linux*)
+++  aarch64*-*-linux* | aarch64*-*-netbsd*)
+      case ${target} in
+        aarch64*-*-*)
+  	host_extra_gcc_objs="driver-aarch64.o"

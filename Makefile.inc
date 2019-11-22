@@ -6,9 +6,11 @@
 unexport CC
 unexport CXX
 unexport CPP
+unexport FC
 unexport CFLAGS
 unexport CPPFLAGS
 unexport CXXFLAGS
+unexport FFLAGS
 unexport LDFLAGS
 
 -include ../config.mk
@@ -21,6 +23,7 @@ endif
 # Set convenience variables for use by package-specific Makefiles.
 RUMPRUN_CC=$(RUMPRUN_TOOLCHAIN_TUPLE)-gcc
 RUMPRUN_CXX=$(RUMPRUN_TOOLCHAIN_TUPLE)-g++
+RUMPRUN_FC=$(RUMPRUN_TOOLCHAIN_TUPLE)-gfortran
 RUMPRUN_SYSROOT:=$(shell ${RUMPRUN_CC} -print-sysroot)
 RUMPRUN_CMAKE_TOOLCHAIN_FILE:=${RUMPRUN_SYSROOT}/share/${RUMPRUN_TOOLCHAIN_TUPLE}-toolchain.cmake
 

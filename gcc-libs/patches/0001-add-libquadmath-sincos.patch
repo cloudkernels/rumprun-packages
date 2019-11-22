@@ -1,0 +1,84 @@
+diff -urN a/libquadmath/Makefile.am libquadmath/Makefile.am
+--- a/libquadmath/Makefile.am	2016-12-21 01:51:43.000000000 -0600
++++ b/libquadmath/Makefile.am	2019-11-10 19:16:10.617145943 -0600
+@@ -63,7 +63,7 @@
+   math/crealq.c math/fdimq.c math/fmaxq.c math/fminq.c math/ilogbq.c \
+   math/llrintq.c math/log2q.c math/lrintq.c math/nearbyintq.c math/remquoq.c \
+   math/ccoshq.c math/cexpq.c math/clog10q.c math/clogq.c math/csinq.c \
+-  math/csinhq.c math/csqrtq.c math/ctanq.c math/ctanhq.c \
++  math/csinhq.c math/csqrtq.c math/ctanq.c math/ctanhq.c math/sincos.c \
+   printf/addmul_1.c printf/add_n.c printf/cmp.c printf/divrem.c \
+   printf/flt1282mpn.c printf/fpioconst.c printf/lshift.c printf/mul_1.c \
+   printf/mul_n.c printf/mul.c printf/printf_fphex.c printf/printf_fp.c \
+diff -urN a/libquadmath/Makefile.in libquadmath/Makefile.in
+--- a/libquadmath/Makefile.in	2016-12-21 01:51:43.000000000 -0600
++++ b/libquadmath/Makefile.in	2019-11-10 19:17:49.977649297 -0600
+@@ -155,6 +155,7 @@
+ @BUILD_LIBQUADMATH_TRUE@	math/clogq.lo math/csinq.lo \
+ @BUILD_LIBQUADMATH_TRUE@	math/csinhq.lo math/csqrtq.lo \
+ @BUILD_LIBQUADMATH_TRUE@	math/ctanq.lo math/ctanhq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/sincos.lo \
+ @BUILD_LIBQUADMATH_TRUE@	printf/addmul_1.lo printf/add_n.lo \
+ @BUILD_LIBQUADMATH_TRUE@	printf/cmp.lo printf/divrem.lo \
+ @BUILD_LIBQUADMATH_TRUE@	printf/flt1282mpn.lo \
+@@ -375,7 +376,7 @@
+ @BUILD_LIBQUADMATH_TRUE@  math/crealq.c math/fdimq.c math/fmaxq.c math/fminq.c math/ilogbq.c \
+ @BUILD_LIBQUADMATH_TRUE@  math/llrintq.c math/log2q.c math/lrintq.c math/nearbyintq.c math/remquoq.c \
+ @BUILD_LIBQUADMATH_TRUE@  math/ccoshq.c math/cexpq.c math/clog10q.c math/clogq.c math/csinq.c \
+-@BUILD_LIBQUADMATH_TRUE@  math/csinhq.c math/csqrtq.c math/ctanq.c math/ctanhq.c \
++@BUILD_LIBQUADMATH_TRUE@  math/csinhq.c math/csqrtq.c math/ctanq.c math/ctanhq.c math/sincos.c \
+ @BUILD_LIBQUADMATH_TRUE@  printf/addmul_1.c printf/add_n.c printf/cmp.c printf/divrem.c \
+ @BUILD_LIBQUADMATH_TRUE@  printf/flt1282mpn.c printf/fpioconst.c printf/lshift.c printf/mul_1.c \
+ @BUILD_LIBQUADMATH_TRUE@  printf/mul_n.c printf/mul.c printf/printf_fphex.c printf/printf_fp.c \
+@@ -638,6 +639,7 @@
+ math/csqrtq.lo: math/$(am__dirstamp) math/$(DEPDIR)/$(am__dirstamp)
+ math/ctanq.lo: math/$(am__dirstamp) math/$(DEPDIR)/$(am__dirstamp)
+ math/ctanhq.lo: math/$(am__dirstamp) math/$(DEPDIR)/$(am__dirstamp)
++math/sincos.lo: math/$(am__dirstamp) math/$(DEPDIR)/$(am__dirstamp)
+ printf/$(am__dirstamp):
+ 	@$(MKDIR_P) printf
+ 	@: > printf/$(am__dirstamp)
+@@ -869,6 +871,7 @@
+ 	-rm -f math/truncq.lo
+ 	-rm -f math/x2y2m1q.$(OBJEXT)
+ 	-rm -f math/x2y2m1q.lo
++	-rm -f math/sincos.lo
+ 	-rm -f printf/add_n.$(OBJEXT)
+ 	-rm -f printf/add_n.lo
+ 	-rm -f printf/addmul_1.$(OBJEXT)
+@@ -1000,6 +1003,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@math/$(DEPDIR)/tgammaq.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@math/$(DEPDIR)/truncq.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@math/$(DEPDIR)/x2y2m1q.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@math/$(DEPDIR)/sincos.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@printf/$(DEPDIR)/add_n.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@printf/$(DEPDIR)/addmul_1.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@printf/$(DEPDIR)/cmp.Plo@am__quote@
+diff -urN a/libquadmath/math/sincos.c libquadmath/math/sincos.c
+--- /dev/null	1969-12-31 18:00:00.000000000 -0600
++++ b/libquadmath/math/sincos.c	2019-11-10 19:14:19.408576061 -0600
+@@ -0,0 +1,24 @@
++#include <math.h>
++
++// Disable sincos optimization for all functions in this file,
++// otherwise gcc would generate infinite calls.
++// Refer to gcc PR46926.
++// -fno-builtin-sin or -fno-builtin-cos can disable sincos optimization,
++// but these two options do not work inside optimize pragma in-file.
++// Thus we just enforce -O0 when compiling this file.
++#pragma GCC optimize ("O0")
++
++void sincos(double x, double* p_sin, double* p_cos) {
++  *p_sin = sin(x);
++  *p_cos = cos(x);
++}
++
++void sincosf(float x, float* p_sinf, float* p_cosf) {
++  *p_sinf = sinf(x);
++  *p_cosf = cosf(x);
++}
++
++void sincosl(long double x, long double* p_sinl, long double* p_cosl) {
++  *p_sinl = sinl(x);
++  *p_cosl = cosl(x);
++}
