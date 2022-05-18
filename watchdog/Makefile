@@ -1,6 +1,7 @@
 include ../Makefile.inc
 
 all: build/watchdog.o
+	mkdir -p $(RUMPRUN_PKGS_DIR)/lib
 	cp build/watchdog.o $(RUMPRUN_PKGS_DIR)/lib
 
 build/watchdog.o: build/configure
