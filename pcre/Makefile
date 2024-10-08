@@ -1,5 +1,6 @@
 include ../Makefile.inc
-UPSTREAM=ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.40.tar.gz
+##UPSTREAM=ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.40.tar.gz
+UPSTREAM=https://downloads.sourceforge.net/project/pcre/pcre/8.45/pcre-8.45.tar.bz2
 TARBALL=$(notdir $(UPSTREAM))
 
 all: bin/pcre
@@ -24,7 +25,7 @@ dl/$(TARBALL):
 
 build/configure: | dl/$(TARBALL)
 	mkdir -p build
-	(cd build && tar -zx --strip-components 1 -f ../dl/$(TARBALL))
+	(cd build && tar -jx --strip-components 1 -f ../dl/$(TARBALL))
 
 .PHONY: clean
 clean:
