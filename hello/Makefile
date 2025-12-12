@@ -1,20 +1,13 @@
 include ../Makefile.inc
 
-all: bin/hello.spt bin/hello.hvt
+all: bin/hello-rumprun
 
-bin/hello.spt: build/hello.spt
+bin/hello-rumprun: build/hello-rumprun
 	mkdir -p bin
 	cp $< $@
 
-bin/hello.hvt: build/hello.hvt
-	mkdir -p bin
-	cp $< $@
-
-build/hello.spt: build/configure
+build/hello-rumprun: build/configure
 	CC=${RUMPRUN_CC} $(MAKE) -C build hello.spt
-
-build/hello.hvt: build/configure
-	CC=${RUMPRUN_CC} $(MAKE) -C build hello.hvt
 
 build/configure:
 	mkdir -p build
